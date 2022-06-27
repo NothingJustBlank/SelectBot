@@ -4,9 +4,9 @@
 #AutoIt3Wrapper_Outfile=SelectBot.Exe
 #AutoIt3Wrapper_Compression=4
 #AutoIt3Wrapper_UseUpx=y
-#AutoIt3Wrapper_Res_Comment=For MyBot.run. Made by Fliegerfaust
+#AutoIt3Wrapper_Res_Comment=For MyBot.run. Made by Fliegerfaust. Updated by NothingJustBlank.
 #AutoIt3Wrapper_Res_Description=SelectBot for MyBot
-#AutoIt3Wrapper_Res_Fileversion=3.8.6.0
+#AutoIt3Wrapper_Res_Fileversion=3.8.6.1
 #AutoIt3Wrapper_Res_LegalCopyright=Fliegerfaust
 #AutoIt3Wrapper_Run_Tidy=y
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
@@ -314,7 +314,7 @@ EndFunc   ;==>GUI_Profile
 Func GUI_Emulator()
 	$g_hGui_Emulator = GUICreate("Emulator", 258, 167, $g_aGuiPos_Main[0], $g_aGuiPos_Main[1] + 150, -1, -1, $g_hGui_Main)
 	$hCmb_Emulator = GUICtrlCreateCombo("BlueStacks", 24, 72, 201, 21, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-	GUICtrlSetData(-1, "BlueStacks2|BlueStacks3|MEmu|Droid4X|Nox|LeapDroid|KOPLAYER|iTools")
+	GUICtrlSetData(-1, "BlueStacks2|BlueStacks3|BlueStacks5|MEmu|Droid4X|Nox|LeapDroid|KOPLAYER|iTools")
 	$hBtn_Next = GUICtrlCreateButton("Next step", 72, 120, 97, 25, $WS_GROUP)
 	GUICtrlCreateLabel("Please select your Emulator", 24, 8, 204, 57)
 	GUISetState()
@@ -367,6 +367,10 @@ Func GUI_Instance()
 			GUISetState(@SW_SHOW, $g_hGui_Instance)
 			GUICtrlSetData($hLbl_Instance, "Please type in your BlueStacks3 Instance Name! Example: Android , Android_1, Android_2, etc")
 			GUICtrlSetData($hIpt_Instance, "Android_")
+		Case "BlueStacks5"
+			GUISetState(@SW_SHOW, $g_hGui_Instance)
+			GUICtrlSetData($hLbl_Instance, "Please type in your BlueStacks5 Instance Name! Example: Nougat32 , Nougat32_1, Nougat32_2, etc")
+			GUICtrlSetData($hIpt_Instance, "Nougat32")
 		Case "MEmu"
 			GUISetState(@SW_SHOW, $g_hGui_Instance)
 			GUICtrlSetData($hLbl_Instance, "Please type in your MEmu Instance Name! Example: MEmu , MEmu_1, MEmu_2, etc")
@@ -415,7 +419,7 @@ Func GUI_Instance()
 				EndSwitch
 				_ArrayUnique($Instance, 0, 0, 0, 0)
 
-				If _ArraySearch($Instance, $Inst, 0, 0, 1) = -1 And $Instance = 1 Then
+				If (_ArraySearch($Instance, $Inst, 0, 0, 1) = -1 And $Instance = 1) And $g_sSelectedEmulator <> "BlueStacks5" Then
 					MsgBox($MB_OK, "Error", "Couldn't find any Instances for " & $g_sSelectedEmulator & "." & " There are only two reasons why." & @CRLF & "#1: You deleted all Instances" & @CRLF & "#2: You don't have the Emulator installed and still pressed YES on the Pop Up before :(", 0, $g_hGui_Instance)
 					GUIDelete($g_hGui_Instance)
 					IniDelete($g_sDirProfiles, $g_sTypedProfile)
@@ -615,6 +619,8 @@ Func GUI_Edit()
 			GUICtrlSetState($hIpt_Instance, $GUI_DISABLE)
 		Case "BlueStacks3"
 			GUICtrlSetData($hCmb_Emulator, "BlueStacks|BlueStacks2|MEmu|Droid4X|Nox|LeapDroid|KOPLAYER|iTools")
+		Case "BlueStacks5"
+			GUICtrlSetData($hCmb_Emulator, "BlueStacks|BlueStacks2|MEmu|Droid4X|Nox|LeapDroid|KOPLAYER|iTools")
 		Case "MEmu"
 			GUICtrlSetData($hCmb_Emulator, "BlueStacks|BlueStacks2|BlueStacks3|Droid4X|Nox|LeapDroid|KOPLAYER|iTools")
 		Case "Droid4X"
@@ -650,6 +656,8 @@ Func GUI_Edit()
 					Switch $sSelectedEmulator
 						Case "BlueStacks3"
 							GUICtrlSetData($hIpt_Instance, "Android_")
+						Case "BlueStacks5"
+						GUICtrlSetData($hIpt_Instance, "Nougat32_")
 						Case "MEmu"
 							GUICtrlSetData($hIpt_Instance, "MEmu_")
 						Case "Droid4X"
