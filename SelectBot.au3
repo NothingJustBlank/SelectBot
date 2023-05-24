@@ -369,8 +369,8 @@ Func GUI_Instance()
 			GUICtrlSetData($hIpt_Instance, "Android_")
 		Case "BlueStacks5"
 			GUISetState(@SW_SHOW, $g_hGui_Instance)
-			GUICtrlSetData($hLbl_Instance, "Please type in your BlueStacks5 Instance Name! Example: Nougat32 , Nougat32_1, Nougat32_2, etc")
-			GUICtrlSetData($hIpt_Instance, "Nougat32")
+			GUICtrlSetData($hLbl_Instance, "Please type in your BlueStacks5 Instance Name! Example: Pie64 , Pie64_1, Pie64_2, etc")
+			GUICtrlSetData($hIpt_Instance, "Pie64")
 		Case "MEmu"
 			GUISetState(@SW_SHOW, $g_hGui_Instance)
 			GUICtrlSetData($hLbl_Instance, "Please type in your MEmu Instance Name! Example: MEmu , MEmu_1, MEmu_2, etc")
@@ -657,7 +657,7 @@ Func GUI_Edit()
 						Case "BlueStacks3"
 							GUICtrlSetData($hIpt_Instance, "Android_")
 						Case "BlueStacks5"
-						GUICtrlSetData($hIpt_Instance, "Nougat32_")
+						GUICtrlSetData($hIpt_Instance, "Pie64_")
 						Case "MEmu"
 							GUICtrlSetData($hIpt_Instance, "MEmu_")
 						Case "Droid4X"
